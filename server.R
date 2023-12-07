@@ -245,7 +245,7 @@ shinyServer(function(input, output, session) {
     userFunc <- safeEval(paste0("function(x) {", input$function_input, "}"))
     
     # Generate values for plotting
-    x_vals <- seq(input$lower_bound, input$upper_bound, length.out = 100)
+    x_vals <- seq(input$lower_bound - 1, input$upper_bound + 1, length.out = 100)
     y_vals <- sapply(x_vals, userFunc)
     
     # Create the ggplot
@@ -258,7 +258,8 @@ shinyServer(function(input, output, session) {
     
     # Add root line if valid
     if (!is.na(methodResult$root)) {
-      p <- p + geom_vline(xintercept = methodResult$root, linetype = "dotted", color = "blue")
+      p <- p + geom_vline(xintercept = methodResult$root, linetype = "dotted", color = "blue") +
+        geom_point(aes(x = methodResult$root, y = 0), color = "red", size = 4)
     }
     
     return(p)
@@ -293,6 +294,19 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  
+  output$root_uniroot <- renderText({ 
+    paste0("x = ", results$Uniroot$root)
+    })
+  output$root_newton <- renderText({ 
+    paste0("x = ", results$NewtonRaphson$root)
+    })
+  output$root_bisection <- renderText({ 
+    paste0("x = ", results$Bisection$root)
+    })
+  output$root_secant <- renderText({ 
+    paste0("x = ", results$Secant$root)
+    })
   
   
   # Render method comparison table

@@ -105,10 +105,10 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(id = "method_tabs",
         # Tab for each method
-        tabPanel("Newton-Raphson", plotOutput("plot_newton"), dataTableOutput("table_newton"), value = "newton_tab"),
-        tabPanel("Bisection", plotOutput("plot_bisection"), dataTableOutput("table_bisection"), value = "bisection_tab"),
-        tabPanel("Secant", plotOutput("plot_secant"), dataTableOutput("table_secant"), value = "secant_tab"),
-        tabPanel("Uniroot", plotOutput("plot_uniroot"), dataTableOutput("table_uniroot"), value = "uniroot_tab"),
+        tabPanel("Newton-Raphson", plotOutput("plot_newton"),"The root of f(x)", textOutput("root_newton"), dataTableOutput("table_newton"), value = "newton_tab"),
+        tabPanel("Bisection", plotOutput("plot_bisection"),"The root of f(x)", textOutput("root_bisection"), dataTableOutput("table_bisection"), value = "bisection_tab"),
+        tabPanel("Secant", plotOutput("plot_secant"),"The root of f(x)", textOutput("root_secant"), dataTableOutput("table_secant"), value = "secant_tab"),
+        tabPanel("Uniroot", plotOutput("plot_uniroot"),"The root of f(x)", textOutput("root_uniroot"), dataTableOutput("table_uniroot"), value = "uniroot_tab"),
         
         # Tab for comparing methods
         tabPanel("Comparison", DT::dataTableOutput("comparisonTable"))
